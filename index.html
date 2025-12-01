@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html lang="de">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description"
+        content="Viuna - Come to Veggie: Authentisches türkisches Çiğ Köfte in Berlin. 100% vegan, täglich frisch, traditionell gewürzt.">
+    <meta name="keywords" content="Çiğ Köfte, vegan, türkisch, Berlin, vegetarisch, gesund">
+    <title>Viuna - Come to Veggie | Authentisches Türkisches Çiğ Köfte</title>
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+
+<body>
+    <!-- HEADER -->
+    <header class="header" id="header">
+        <div class="header-container">
+            <a href="#home" class="logo">Viuna</a>
+
+            <nav class="nav" id="nav">
+                <ul class="nav-links">
+                    <li><a href="#home" class="nav-link active" data-translate="nav_home">Home</a></li>
+                    <li><a href="#menu" class="nav-link" data-translate="nav_menu">Speisekarte</a></li>
+                    <li><a href="#gallery-carousel" class="nav-link" data-translate="nav_gallery">Galerie</a></li>
+                    <li><a href="#about" class="nav-link" data-translate="nav_about">Über Uns</a></li>
+                    <li><a href="#contact" class="nav-link" data-translate="nav_contact">Kontakt</a></li>
+                </ul>
+
+                <div class="language-selector">
+                    <button class="lang-btn active" data-lang="de">DE</button>
+                    <button class="lang-btn" data-lang="tr">TR</button>
+                    <button class="lang-btn" data-lang="en">EN</button>
+                </div>
+
+                <a href="https://www.ubereats.com/de-en/store/cigkofte-come-to-veggie/iLNB3lCDRvaCdMTyD9-9uw"
+                    target="_blank" class="btn btn-accent" data-translate="cta_order">Jetzt Bestellen</a>
+            </nav>
+
+            <button class="mobile-menu-toggle" id="mobileMenuToggle">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </div>
+    </header>
+
+    <!-- HERO SECTION -->
+    <section class="hero" id="home">
+        <div class="hero-background">
+            <img src="images/hero-cigkofte.jpg" alt="Delicious Çiğ Köfte Wrap" id="heroImage">
+        </div>
+        <div class="hero-overlay"></div>
+        <div class="hero-content">
+            <h1 class="hero-title" data-translate="hero_title">Viuna</h1>
+            <p class="hero-subtitle" data-translate="hero_subtitle">Der Geschmack Anatoliens, Vegan Gemacht</p>
+            <p class="hero-description" data-translate="hero_description">Authentisches türkisches Çiğ Köfte – frisch,
+                würzig und 100% pflanzlich</p>
+            <div class="hero-cta">
+                <a href="#menu" class="btn btn-primary btn-lg" data-translate="hero_cta">Speisekarte Entdecken</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- WHY VIUNA SECTION -->
+    <section class="section bg-light" id="why-viuna">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title" data-translate="why_title">Warum Viuna?</h2>
+                <p class="section-subtitle" data-translate="why_subtitle">Entdecken Sie, was uns besonders macht</p>
+            </div>
+
+            <div class="feature-grid">
+                <div class="feature-card fade-in">
+                    <div class="feature-icon">🌱</div>
+                    <h3 class="feature-title" data-translate="feature1_title">100% Vegan</h3>
+                    <p class="feature-description" data-translate="feature1_desc">Komplett pflanzlich, ohne Kompromisse
+                        beim Geschmack</p>
+                </div>
+
+                <div class="feature-card fade-in">
+                    <div class="feature-icon">✨</div>
+                    <h3 class="feature-title" data-translate="feature2_title">Täglich Frisch</h3>
+                    <p class="feature-description" data-translate="feature2_desc">Jeden Tag frisch zubereitet mit den
+                        besten Zutaten</p>
+                </div>
+
+                <div class="feature-card fade-in">
+                    <div class="feature-icon">🌶️</div>
+                    <h3 class="feature-title" data-translate="feature3_title">Authentische Gewürze</h3>
+                    <p class="feature-description" data-translate="feature3_desc">Traditionelle türkische Rezepte mit
+                        original Gewürzen</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- MENU SECTION -->
+    <section class="section" id="menu">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title" data-translate="menu_title">Unsere Spezialitäten</h2>
+                <p class="section-subtitle" data-translate="menu_subtitle">Handgemacht mit Liebe und Tradition</p>
+            </div>
+
+            <div class="grid grid-2" id="menuGrid">
+                <!-- Menu Item 1 -->
+                <div class="card">
+                    <img src="images/menu-durum.jpg" alt="Çiğ Köfte Dürüm" class="card-image">
+                    <div class="card-content">
+                        <h3 class="card-title" data-translate="menu_item1_name">Çiğ Köfte Dürüm</h3>
+                        <p class="card-description" data-translate="menu_item1_desc">Würziges Çiğ Köfte eingewickelt in
+                            frischem Lavash mit knackigem Salat, Minze und Zitrone</p>
+                        <p class="card-price">€5.50</p>
+                    </div>
+                </div>
+
+                <!-- Menu Item 2 -->
+                <div class="card">
+                    <img src="images/menu-plate.jpg" alt="Çiğ Köfte Teller" class="card-image">
+                    <div class="card-content">
+                        <h3 class="card-title" data-translate="menu_item2_name">Çiğ Köfte Teller</h3>
+                        <p class="card-description" data-translate="menu_item2_desc">Serviert mit frischem Gemüse,
+                            Kräutern, Granatapfel und Zitrone</p>
+                        <p class="card-price">€7.90</p>
+                    </div>
+                </div>
+
+                <!-- Menu Item 3 -->
+                <div class="card">
+                    <img src="images/menu-mezze.jpg" alt="Vegan Mezze Platte" class="card-image">
+                    <div class="card-content">
+                        <h3 class="card-title" data-translate="menu_item3_name">Vegan Mezze Platte</h3>
+                        <p class="card-description" data-translate="menu_item3_desc">Eine köstliche Auswahl an Çiğ
+                            Köfte, Hummus, Oliven und frischem Gemüse</p>
+                        <p class="card-price">€9.90</p>
+                    </div>
+                </div>
+
+                <!-- Menu Item 4 -->
+                <div class="card">
+                    <img src="images/menu-box.jpg" alt="Çiğ Köfte Box" class="card-image">
+                    <div class="card-content">
+                        <h3 class="card-title" data-translate="menu_item4_name">Çiğ Köfte Box</h3>
+                        <p class="card-description" data-translate="menu_item4_desc">Perfekt zum Mitnehmen – frisches
+                            Çiğ Köfte mit allen Beilagen</p>
+                        <p class="card-price">€6.50</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- GALLERY CAROUSEL SECTION -->
+    <section class="section bg-light" id="gallery-carousel">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Unsere Köstlichkeiten</h2>
+                <p class="section-subtitle">Entdecken Sie unsere frischen, handgemachten Spezialitäten</p>
+            </div>
+
+            <div class="image-carousel-container">
+                <div class="image-carousel" id="imageCarousel">
+                    <div class="carousel-slide active">
+                        <img src="https://images.unsplash.com/photo-1567337710282-00832b415979?w=800&h=600&fit=crop"
+                            alt="Fresh Vegetables" class="carousel-image">
+                    </div>
+                    <div class="carousel-slide">
+                        <img src="https://images.unsplash.com/photo-1546069901-ba9599a7e63c?w=800&h=600&fit=crop"
+                            alt="Healthy Food" class="carousel-image">
+                    </div>
+                    <div class="carousel-slide">
+                        <img src="https://images.unsplash.com/photo-1512621776951-a57141f2eefd?w=800&h=600&fit=crop"
+                            alt="Vegan Salad" class="carousel-image">
+                    </div>
+                    <div class="carousel-slide">
+                        <img src="https://images.unsplash.com/photo-1540189549336-e6e99c3679fe?w=800&h=600&fit=crop"
+                            alt="Fresh Ingredients" class="carousel-image">
+                    </div>
+                    <div class="carousel-slide">
+                        <img src="https://images.unsplash.com/photo-1547592166-23ac45744acd?w=800&h=600&fit=crop"
+                            alt="Healthy Bowl" class="carousel-image">
+                    </div>
+                </div>
+
+                <button class="carousel-nav carousel-prev" id="galleryPrev">‹</button>
+                <button class="carousel-nav carousel-next" id="galleryNext">›</button>
+
+                <div class="carousel-indicators" id="galleryIndicators">
+                    <span class="indicator active" data-slide="0"></span>
+                    <span class="indicator" data-slide="1"></span>
+                    <span class="indicator" data-slide="2"></span>
+                    <span class="indicator" data-slide="3"></span>
+                    <span class="indicator" data-slide="4"></span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- LOCATION SECTION -->
+    <section class="section bg-light" id="contact">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title" data-translate="location_title">Besuchen Sie Uns</h2>
+                <p class="section-subtitle" data-translate="location_subtitle">Kommen Sie vorbei und genießen Sie
+                    authentisches türkisches Çiğ Köfte</p>
+            </div>
+
+            <div style="max-width: 900px; margin: 0 auto;">
+                <div style="border-radius: var(--radius-xl); overflow: hidden; box-shadow: var(--shadow-lg);">
+                    <iframe
+                        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d327.0056596077219!2d9.305001532342347!3d48.73987890583907!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x4799c136b62f73ff%3A0xccf0b459866cc588!2sUnterer%20Metzgerbach%2024%2C%2073728%20Esslingen%20am%20Neckar!5e0!3m2!1sen!2sde!4v1764602213515!5m2!1sen!2sde"
+                        width=100% height="450" style="border:0;" allowfullscreen="" loading="lazy"
+                        referrerpolicy="no-referrer-when-downgrade"></iframe>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- TESTIMONIALS SECTION -->
+    <section class="section" id="gallery">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title" data-translate="testimonials_title">Was Unsere Gäste Sagen</h2>
+                <p class="section-subtitle" data-translate="testimonials_subtitle">Echte Bewertungen von echten Menschen
+                </p>
+            </div>
+
+            <div class="testimonial-carousel">
+                <div class="testimonial" id="testimonialContent">
+                    <p class="testimonial-text" data-translate="testimonial1_text">"Das beste Çiğ Köfte, das ich je
+                        gegessen habe! Frisch, würzig und absolut köstlich. Komme immer wieder!"</p>
+                    <p class="testimonial-author" data-translate="testimonial1_author">- Sarah M.</p>
+                </div>
+
+                <div class="carousel-controls">
+                    <button class="carousel-btn" id="prevTestimonial">‹</button>
+                    <button class="carousel-btn" id="nextTestimonial">›</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ABOUT SECTION -->
+    <section class="section bg-light" id="about">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Unsere Geschichte</h2>
+            </div>
+
+            <div style="max-width: 800px; margin: 0 auto; text-align: center;">
+                <p
+                    style="font-size: var(--font-size-lg); line-height: 1.8; color: var(--color-dark-gray); margin-bottom: var(--spacing-lg);">
+                    Viuna bringt die authentischen Aromen der türkischen Küche nach Deutschland. Unter neuer Leitung
+                    setzen wir die Tradition fort, das beste Çiğ Köfte zu servieren – komplett vegan und mit Liebe
+                    zubereitet.
+                </p>
+                <p style="font-size: var(--font-size-lg); line-height: 1.8; color: var(--color-dark-gray);">
+                    Jede Portion wird täglich frisch mit traditionellen Gewürzen und den besten Zutaten hergestellt. Wir
+                    glauben, dass gutes Essen nicht nur den Körper, sondern auch die Seele nährt.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <!-- About Section -->
+                <div class="footer-section">
+                    <h4 data-translate="footer_about_title">Über Viuna</h4>
+                    <p data-translate="footer_about_text">Wir bringen den authentischen Geschmack der türkischen Küche
+                        nach Deutschland – 100% vegan, 100% lecker.</p>
+                    <div class="social-links" style="margin-top: var(--spacing-md);">
+                        <a href="https://instagram.com" target="_blank" class="social-link" aria-label="Instagram">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                                <path
+                                    d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z" />
+                            </svg>
+                        </a>
+                        <a href="https://facebook.com" target="_blank" class="social-link" aria-label="Facebook">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                                <path
+                                    d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z" />
+                            </svg>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Quick Links -->
+                <div class="footer-section">
+                    <h4 data-translate="footer_links_title">Schnelllinks</h4>
+                    <div class="footer-links">
+                        <a href="#home" class="footer-link" data-translate="nav_home">Home</a>
+                        <a href="#menu" class="footer-link" data-translate="nav_menu">Speisekarte</a>
+                        <a href="#about" class="footer-link" data-translate="nav_about">Über Uns</a>
+                        <a href="#contact" class="footer-link" data-translate="nav_contact">Kontakt</a>
+                        <a href="#" class="footer-link" data-translate="footer_impressum">Impressum</a>
+                    </div>
+                </div>
+
+                <!-- Contact Info -->
+                <div class="footer-section">
+                    <h4 data-translate="footer_contact_title">Kontakt</h4>
+                    <div class="footer-links">
+                        <p data-translate="footer_address">Musterstraße 123, 10115 Berlin</p>
+                        <p data-translate="footer_phone">Tel: +49 30 12345678</p>
+                        <p data-translate="footer_email">info@viuna.de</p>
+                    </div>
+                </div>
+
+                <!-- Opening Hours -->
+                <div class="footer-section">
+                    <h4 data-translate="footer_hours">Öffnungszeiten</h4>
+                    <div class="footer-links">
+                        <p data-translate="footer_hours_weekday">Mo-Fr: 11:00 - 21:00</p>
+                        <p data-translate="footer_hours_weekend">Sa-So: 12:00 - 22:00</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="footer-bottom">
+                <p data-translate="footer_bottom">© 2025 Viuna - Come to Veggie. Alle Rechte vorbehalten.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- JavaScript -->
+    <script src="js/translations.js"></script>
+    <script src="js/main.js"></script>
+</body>
+
+</html>

@@ -117,3 +117,54 @@ insta and facebook icons aren't showing up or they're wrong. fix them.
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+LINE 150:
+## 6. Client-Side Functionality & UX (High Polish)
+
+* **Atmosphere & Texture:** Introduce subtle, warm textures (e.g., terracotta patterns, soft spice tones) to the background or secondary sections to add depth and an authentic Turkish feel.
+* **Menu Polish:** The Speisekarte items must be presented in visually appealing, large "cards" with high-quality imagery. Add subtle hover effects (e.g., light zoom or shadow) to the menu cards to enhance focus and appetite appeal.
+* **Sticky Header & Smooth Scrolling:** Maintain the sticky header and smooth scrolling for internal navigation links.
+
+## 7. Admin Interface (Required & Corrected)
+
+The design must include a separate, professional wireframe/mockup for an administrative panel (`admin.html` route).
+
+* **Accessibility:** The main website **Footer** must include a small, discreet link labeled **"Admin Login"** which directs to the secure login page.
+* **Design Focus:** Simple, secure, and professional layout. Use branding colors lightly for accents.
+
+* **Key Modifiable Sections (CRITICAL FUNCTIONALITY):**
+    1.  **Speisekarte Editor:** Full CRUD functionality. **Must include a dedicated feature to upload or change the image associated with each menu item.**
+    2.  **Image Gallery Management:** **Crucial:** Must feature a dedicated section for gallery images with mock-up functionality for: **Drag-and-drop Uploading, Deleting, and Reordering** of photos.
+    3.  **Contact/Social Media Editor:** Fields to update address, opening hours, phone number, and all social media URLs.
+    4.  **Content Editor:** Ability to change the "Über Uns" story, all multilingual text, and front-page slogans.
+
+

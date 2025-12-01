@@ -90,27 +90,27 @@ let menuItems = JSON.parse(localStorage.getItem('viuna-menu-items')) || [
         id: 1,
         name: { de: 'Çiğ Köfte Dürüm', tr: 'Çiğ Köfte Dürüm', en: 'Çiğ Köfte Dürüm' },
         description: { de: 'Würziges Çiğ Köfte eingewickelt in frischem Lavash mit knackigem Salat, Minze und Zitrone', tr: 'Taze lavaşta baharatlı çiğ köfte, çıtır marul, nane ve limon ile', en: 'Spicy çiğ köfte wrapped in fresh lavash with crisp lettuce, mint, and lemon' },
-        price: 5.50
+        price: 5.50,
+        image: null
     },
-    {
-        id: 2,
-        name: { de: 'Çiğ Köfte Teller', tr: 'Çiğ Köfte Tabağı', en: 'Çiğ Köfte Plate' },
-        description: { de: 'Serviert mit frischem Gemüse, Kräutern, Granatapfel und Zitrone', tr: 'Taze sebzeler, otlar, nar ve limon ile servis edilir', en: 'Served with fresh vegetables, herbs, pomegranate, and lemon' },
-        price: 7.90
-    },
-    {
-        id: 3,
-        name: { de: 'Vegan Mezze Platte', tr: 'Vegan Meze Tabağı', en: 'Vegan Mezze Platter' },
-        description: { de: 'Eine köstliche Auswahl an Çiğ Köfte, Hummus, Oliven und frischem Gemüse', tr: 'Çiğ köfte, humus, zeytin ve taze sebzelerden lezzetli bir seçki', en: 'A delicious selection of çiğ köfte, hummus, olives, and fresh vegetables' },
-        price: 9.90
-    },
-    {
-        id: 4,
-        name: { de: 'Çiğ Köfte Box', tr: 'Çiğ Köfte Box', en: 'Çiğ Köfte Box' },
-        description: { de: 'Perfekt zum Mitnehmen – frisches Çiğ Köfte mit allen Beilagen', tr: 'Paket servise mükemmel – tüm garnitürlerle taze çiğ köfte', en: 'Perfect for takeaway – fresh çiğ köfte with all the trimmings' },
-        price: 6.50
-    }
+    // ... other items
 ];
+
+// Handle Menu Image Upload
+let currentMenuImage = null;
+document.getElementById('itemImage')?.addEventListener('change', (e) => {
+    const file = e.target.files[0];
+    if (file) {
+        const reader = new FileReader();
+        reader.onload = (event) => {
+            currentMenuImage = event.target.result;
+            const preview = document.getElementById('imagePreview');
+            preview.style.display = 'block';
+            preview.querySelector('img').src = currentMenuImage;
+        };
+        reader.readAsDataURL(file);
+    }
+});
 
 function loadMenuItems() {
     const tbody = document.getElementById('menuTableBody');
@@ -121,7 +121,12 @@ function loadMenuItems() {
     menuItems.forEach(item => {
         const row = document.createElement('tr');
         row.innerHTML = `
-      <td>${item.name.de}</td>
+      <td>
+        <div style="display: flex; align-items: center; gap: 10px;">
+            ${item.image ? `<img src="${item.image}" style="width: 40px; height: 40px; object-fit: cover; border-radius: 4px;">` : ''}
+            ${item.name.de}
+        </div>
+      </td>
       <td>€${item.price.toFixed(2)}</td>
       <td class="table-actions">
         <button class="btn btn-sm btn-outline" onclick="editMenuItem(${item.id})">Bearbeiten</button>
@@ -145,28 +150,90 @@ function saveMenuItems() {
     localStorage.setItem('viuna-menu-items', JSON.stringify(menuItems));
 }
 
-function addMenuItem(itemData) {
-    const newId = menuItems.length > 0 ? Math.max(...menuItems.map(i => i.id)) + 1 : 1;
-    menuItems.push({ id: newId, ...itemData });
-    saveMenuItems();
-    loadMenuItems();
-    showAlert('menuAlert', 'Menü Item erfolgreich hinzugefügt!');
-}
+// Update addMenuItem/editMenuItem logic to handle image
+let currentEditingId = null;
 
+// Add Item Button
+document.getElementById('addMenuItemBtn')?.addEventListener('click', () => {
+    currentEditingId = null;
+    document.getElementById('modalTitle').textContent = 'Menü Item Hinzufügen';
+    document.getElementById('menuItemForm').reset();
+    document.getElementById('imagePreview').style.display = 'none';
+    currentMenuImage = null;
+    document.getElementById('menuModal').classList.remove('hidden');
+});
+
+// Cancel Modal
+document.getElementById('cancelModal')?.addEventListener('click', () => {
+    document.getElementById('menuModal').classList.add('hidden');
+});
+
+// Edit Item
 function editMenuItem(id) {
     const item = menuItems.find(i => i.id === id);
     if (!item) return;
 
-    // Populate form with item data
+    currentEditingId = id;
+    document.getElementById('modalTitle').textContent = 'Menü Item Bearbeiten';
+
+    // Populate form
     document.getElementById('itemNameDE').value = item.name.de;
     document.getElementById('itemNameTR').value = item.name.tr;
     document.getElementById('itemNameEN').value = item.name.en;
     document.getElementById('itemDescDE').value = item.description.de;
     document.getElementById('itemPrice').value = item.price;
 
-    // Show modal (simplified - in production use proper modal)
-    alert('Bearbeiten-Funktion: In der Vollversion würde hier ein Modal erscheinen.');
+    // Show image preview if exists
+    if (item.image) {
+        currentMenuImage = item.image;
+        const preview = document.getElementById('imagePreview');
+        preview.style.display = 'block';
+        preview.querySelector('img').src = item.image;
+    } else {
+        currentMenuImage = null;
+        document.getElementById('imagePreview').style.display = 'none';
+    }
+
+    document.getElementById('menuModal').classList.remove('hidden');
 }
+
+// Save Item (Add or Update)
+document.getElementById('menuItemForm')?.addEventListener('submit', (e) => {
+    e.preventDefault();
+
+    const itemData = {
+        name: {
+            de: document.getElementById('itemNameDE').value,
+            tr: document.getElementById('itemNameTR').value,
+            en: document.getElementById('itemNameEN').value
+        },
+        description: {
+            de: document.getElementById('itemDescDE').value,
+            tr: document.getElementById('itemDescDE').value, // Simplified: using DE desc for all for now or add fields
+            en: document.getElementById('itemDescDE').value
+        },
+        price: parseFloat(document.getElementById('itemPrice').value),
+        image: currentMenuImage
+    };
+
+    if (currentEditingId) {
+        // Update existing
+        const index = menuItems.findIndex(i => i.id === currentEditingId);
+        if (index !== -1) {
+            menuItems[index] = { ...menuItems[index], ...itemData };
+            showAlert('menuAlert', 'Menü Item aktualisiert!');
+        }
+    } else {
+        // Add new
+        const newId = menuItems.length > 0 ? Math.max(...menuItems.map(i => i.id)) + 1 : 1;
+        menuItems.push({ id: newId, ...itemData });
+        showAlert('menuAlert', 'Neues Item hinzugefügt!');
+    }
+
+    saveMenuItems();
+    loadMenuItems();
+    document.getElementById('menuModal').classList.add('hidden');
+});
 
 function deleteMenuItem(id) {
     if (confirm('Möchten Sie dieses Item wirklich löschen?')) {
@@ -176,6 +243,7 @@ function deleteMenuItem(id) {
         showAlert('menuAlert', 'Menü Item erfolgreich gelöscht!');
     }
 }
+
 
 // ===================================
 // GALLERY MANAGEMENT
@@ -194,16 +262,73 @@ function loadGallery() {
         galleryImages.forEach((img, index) => {
             const card = document.createElement('div');
             card.className = 'card';
+            card.draggable = true; // Enable drag
+            card.dataset.index = index;
             card.innerHTML = `
         <img src="${img.data}" alt="${img.name}" style="width: 100%; height: 200px; object-fit: cover; border-radius: var(--radius-md); margin-bottom: var(--spacing-sm);">
         <p style="font-size: 0.875rem; margin-bottom: var(--spacing-sm);">${img.name}</p>
         <button class="btn btn-sm btn-danger" onclick="deleteImage(${index})">Löschen</button>
       `;
+
+            // Drag events
+            card.addEventListener('dragstart', handleDragStart);
+            card.addEventListener('dragover', handleDragOver);
+            card.addEventListener('drop', handleDrop);
+            card.addEventListener('dragenter', handleDragEnter);
+            card.addEventListener('dragleave', handleDragLeave);
+
             grid.appendChild(card);
         });
     }
 
     updateGalleryCount();
+}
+
+// Drag and Drop Handlers
+let dragSrcEl = null;
+
+function handleDragStart(e) {
+    dragSrcEl = this;
+    e.dataTransfer.effectAllowed = 'move';
+    e.dataTransfer.setData('text/html', this.innerHTML);
+    this.classList.add('dragging');
+}
+
+function handleDragOver(e) {
+    if (e.preventDefault) {
+        e.preventDefault();
+    }
+    e.dataTransfer.dropEffect = 'move';
+    return false;
+}
+
+function handleDragEnter(e) {
+    this.classList.add('over');
+}
+
+function handleDragLeave(e) {
+    this.classList.remove('over');
+}
+
+function handleDrop(e) {
+    if (e.stopPropagation) {
+        e.stopPropagation();
+    }
+
+    if (dragSrcEl !== this) {
+        const srcIndex = parseInt(dragSrcEl.dataset.index);
+        const targetIndex = parseInt(this.dataset.index);
+
+        // Swap items in array
+        const temp = galleryImages[srcIndex];
+        galleryImages[srcIndex] = galleryImages[targetIndex];
+        galleryImages[targetIndex] = temp;
+
+        saveGallery();
+        loadGallery();
+    }
+
+    return false;
 }
 
 function updateGalleryCount() {
@@ -254,8 +379,16 @@ document.getElementById('contentForm')?.addEventListener('submit', (e) => {
 
     const contentData = {
         heroTitleDE: document.getElementById('heroTitleDE').value,
+        heroTitleTR: document.getElementById('heroTitleTR').value,
+        heroTitleEN: document.getElementById('heroTitleEN').value,
+
         heroSubtitleDE: document.getElementById('heroSubtitleDE').value,
-        aboutTextDE: document.getElementById('aboutTextDE').value
+        heroSubtitleTR: document.getElementById('heroSubtitleTR').value,
+        heroSubtitleEN: document.getElementById('heroSubtitleEN').value,
+
+        aboutTextDE: document.getElementById('aboutTextDE').value,
+        aboutTextTR: document.getElementById('aboutTextTR').value,
+        aboutTextEN: document.getElementById('aboutTextEN').value
     };
 
     localStorage.setItem('viuna-content', JSON.stringify(contentData));

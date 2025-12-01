@@ -163,24 +163,58 @@
                     <div id="contentAlert" class="alert alert-success hidden"></div>
 
                     <form id="contentForm">
-                        <div class="form-group">
-                            <label class="form-label">Hero Titel (DE)</label>
-                            <input type="text" class="form-input" id="heroTitleDE" value="Viuna">
+                        <h3 class="mb-2">Hero Sektion (Startseite)</h3>
+                        <div class="grid grid-3">
+                            <div class="form-group">
+                                <label class="form-label">Titel (DE)</label>
+                                <input type="text" class="form-input" id="heroTitleDE" value="Viuna">
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label">Titel (TR)</label>
+                                <input type="text" class="form-input" id="heroTitleTR" value="Viuna">
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label">Titel (EN)</label>
+                                <input type="text" class="form-input" id="heroTitleEN" value="Viuna">
+                            </div>
                         </div>
 
-                        <div class="form-group">
-                            <label class="form-label">Hero Untertitel (DE)</label>
-                            <input type="text" class="form-input" id="heroSubtitleDE"
-                                value="Der Geschmack Anatoliens, Vegan Gemacht">
+                        <div class="grid grid-3">
+                            <div class="form-group">
+                                <label class="form-label">Untertitel (DE)</label>
+                                <input type="text" class="form-input" id="heroSubtitleDE"
+                                    value="Der Geschmack Anatoliens, Vegan Gemacht">
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label">Untertitel (TR)</label>
+                                <input type="text" class="form-input" id="heroSubtitleTR"
+                                    value="Anadolu'nun Lezzeti, Vegan Hali">
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label">Untertitel (EN)</label>
+                                <input type="text" class="form-input" id="heroSubtitleEN"
+                                    value="The Taste of Anatolia, Made Vegan">
+                            </div>
                         </div>
 
+                        <h3 class="mt-3 mb-2">Über Uns</h3>
                         <div class="form-group">
-                            <label class="form-label">Über Uns Text (DE)</label>
+                            <label class="form-label">Text (DE)</label>
                             <textarea class="form-textarea"
                                 id="aboutTextDE">Viuna bringt die authentischen Aromen der türkischen Küche nach Deutschland. Unter neuer Leitung setzen wir die Tradition fort, das beste Çiğ Köfte zu servieren – komplett vegan und mit Liebe zubereitet.</textarea>
                         </div>
+                        <div class="form-group">
+                            <label class="form-label">Text (TR)</label>
+                            <textarea class="form-textarea"
+                                id="aboutTextTR">Viuna, Türk mutfağının otantik lezzetlerini Almanya'ya getiriyor. Yeni yönetim altında, en iyi Çiğ Köfte'yi sunma geleneğini sürdürüyoruz - tamamen vegan ve sevgiyle hazırlanmış.</textarea>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Text (EN)</label>
+                            <textarea class="form-textarea"
+                                id="aboutTextEN">Viuna brings the authentic flavors of Turkish cuisine to Germany. Under new management, we continue the tradition of serving the best Çiğ Köfte – completely vegan and prepared with love.</textarea>
+                        </div>
 
-                        <button type="submit" class="btn btn-primary">Speichern</button>
+                        <button type="submit" class="btn btn-primary mt-2">Speichern</button>
                     </form>
                 </div>
             </div>
@@ -246,6 +280,13 @@
         <div class="modal-content">
             <h3 id="modalTitle">Menü Item Hinzufügen</h3>
             <form id="menuItemForm">
+                <div class="form-group">
+                    <label class="form-label">Bild hochladen</label>
+                    <input type="file" id="itemImage" class="form-input" accept="image/*">
+                    <div id="imagePreview" style="margin-top: 10px; max-width: 100px; display: none;">
+                        <img src="" alt="Preview" style="width: 100%; border-radius: var(--radius-md);">
+                    </div>
+                </div>
                 <div class="form-group">
                     <label class="form-label">Name (Deutsch)</label>
                     <input type="text" class="form-input" id="itemNameDE" required>

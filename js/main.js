@@ -62,15 +62,21 @@ function loadAdminData() {
     // Load content data
     const contentData = JSON.parse(localStorage.getItem('viuna-content'));
     if (contentData) {
-        const heroTitle = document.querySelector('.hero-title');
-        const heroSubtitle = document.querySelector('.hero-subtitle');
+        // Update translations with dynamic content
+        if (contentData.heroTitleDE) translations.de.hero_title = contentData.heroTitleDE;
+        if (contentData.heroTitleTR) translations.tr.hero_title = contentData.heroTitleTR;
+        if (contentData.heroTitleEN) translations.en.hero_title = contentData.heroTitleEN;
 
-        if (heroTitle && contentData.heroTitleDE) {
-            heroTitle.textContent = contentData.heroTitleDE;
-        }
-        if (heroSubtitle && contentData.heroSubtitleDE) {
-            heroSubtitle.textContent = contentData.heroSubtitleDE;
-        }
+        if (contentData.heroSubtitleDE) translations.de.hero_subtitle = contentData.heroSubtitleDE;
+        if (contentData.heroSubtitleTR) translations.tr.hero_subtitle = contentData.heroSubtitleTR;
+        if (contentData.heroSubtitleEN) translations.en.hero_subtitle = contentData.heroSubtitleEN;
+
+        if (contentData.aboutTextDE) translations.de.footer_about_text = contentData.aboutTextDE; // Using footer about text key for simplicity or create new key
+        // Note: The main about section text is hardcoded in HTML currently. 
+        // To make it fully dynamic, we should add data-translate attributes to the about section paragraphs.
+
+        // Update current view
+        updateLanguage(currentLanguage);
     }
 
     // Load menu items
@@ -89,8 +95,12 @@ function updateMenuDisplay(menuItems) {
     menuItems.forEach(item => {
         const card = document.createElement('div');
         card.className = 'card';
+
+        // Use uploaded image or fallback
+        const imageSrc = item.image || 'images/menu-placeholder.jpg';
+
         card.innerHTML = `
-      <img src="images/menu-placeholder.jpg" alt="${item.name.de}" class="card-image" onerror="this.style.background='linear-gradient(135deg, #E8744F 0%, #C44536 100%)'; this.style.minHeight='250px';">
+      <img src="${imageSrc}" alt="${item.name.de}" class="card-image" onerror="this.style.background='linear-gradient(135deg, #E8744F 0%, #C44536 100%)'; this.style.minHeight='250px';">
       <div class="card-content">
         <h3 class="card-title">${item.name[currentLanguage] || item.name.de}</h3>
         <p class="card-description">${item.description[currentLanguage] || item.description.de}</p>

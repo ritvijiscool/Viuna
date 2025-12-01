@@ -213,8 +213,12 @@ p {
     background-color: var(--color-primary-green);
 }
 
+/* Fix for background opacity using rgba in the gradient */
 .bg-light {
     background-color: var(--color-off-white);
+    background-image: radial-gradient(rgba(212, 101, 77, 0.1) 1px, transparent 1px), radial-gradient(rgba(212, 101, 77, 0.1) 1px, var(--color-off-white) 1px);
+    background-size: 30px 30px;
+    background-position: 0 0, 15px 15px;
 }
 
 .section {
@@ -475,7 +479,7 @@ p {
 }
 
 .card:hover {
-    transform: translateY(-8px);
+    transform: translateY(-8px) scale(1.02);
     box-shadow: var(--shadow-xl);
 }
 
@@ -845,6 +849,21 @@ p {
     border-top: 1px solid rgba(255, 255, 255, 0.1);
     color: var(--color-gray);
     font-size: 0.9rem;
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-xs);
+    align-items: center;
+}
+
+.admin-link {
+    font-size: 0.75rem;
+    color: rgba(255, 255, 255, 0.2);
+    text-decoration: none;
+    transition: color var(--transition-base);
+}
+
+.admin-link:hover {
+    color: var(--color-primary-green);
 }
 
 /* ===================================

@@ -1,5 +1,5 @@
 // Admin Panel JavaScript
-// Handles authentication, menu management, gallery, and content editing
+// Handles authentication, menu management, and content editing
 
 // ===================================
 // AUTHENTICATION
@@ -246,132 +246,6 @@ function deleteMenuItem(id) {
 
 
 // ===================================
-// GALLERY MANAGEMENT
-// ===================================
-let galleryImages = JSON.parse(localStorage.getItem('viuna-gallery')) || [];
-
-function loadGallery() {
-    const grid = document.getElementById('galleryGrid');
-    if (!grid) return;
-
-    grid.innerHTML = '';
-
-    if (galleryImages.length === 0) {
-        grid.innerHTML = '<p style="grid-column: 1/-1; text-align: center; color: var(--color-gray);">Noch keine Bilder hochgeladen</p>';
-    } else {
-        galleryImages.forEach((img, index) => {
-            const card = document.createElement('div');
-            card.className = 'card';
-            card.draggable = true; // Enable drag
-            card.dataset.index = index;
-            card.innerHTML = `
-        <img src="${img.data}" alt="${img.name}" style="width: 100%; height: 200px; object-fit: cover; border-radius: var(--radius-md); margin-bottom: var(--spacing-sm);">
-        <p style="font-size: 0.875rem; margin-bottom: var(--spacing-sm);">${img.name}</p>
-        <button class="btn btn-sm btn-danger" onclick="deleteImage(${index})">Löschen</button>
-      `;
-
-            // Drag events
-            card.addEventListener('dragstart', handleDragStart);
-            card.addEventListener('dragover', handleDragOver);
-            card.addEventListener('drop', handleDrop);
-            card.addEventListener('dragenter', handleDragEnter);
-            card.addEventListener('dragleave', handleDragLeave);
-
-            grid.appendChild(card);
-        });
-    }
-
-    updateGalleryCount();
-}
-
-// Drag and Drop Handlers
-let dragSrcEl = null;
-
-function handleDragStart(e) {
-    dragSrcEl = this;
-    e.dataTransfer.effectAllowed = 'move';
-    e.dataTransfer.setData('text/html', this.innerHTML);
-    this.classList.add('dragging');
-}
-
-function handleDragOver(e) {
-    if (e.preventDefault) {
-        e.preventDefault();
-    }
-    e.dataTransfer.dropEffect = 'move';
-    return false;
-}
-
-function handleDragEnter(e) {
-    this.classList.add('over');
-}
-
-function handleDragLeave(e) {
-    this.classList.remove('over');
-}
-
-function handleDrop(e) {
-    if (e.stopPropagation) {
-        e.stopPropagation();
-    }
-
-    if (dragSrcEl !== this) {
-        const srcIndex = parseInt(dragSrcEl.dataset.index);
-        const targetIndex = parseInt(this.dataset.index);
-
-        // Swap items in array
-        const temp = galleryImages[srcIndex];
-        galleryImages[srcIndex] = galleryImages[targetIndex];
-        galleryImages[targetIndex] = temp;
-
-        saveGallery();
-        loadGallery();
-    }
-
-    return false;
-}
-
-function updateGalleryCount() {
-    const countEl = document.getElementById('galleryCount');
-    if (countEl) {
-        countEl.textContent = galleryImages.length;
-    }
-}
-
-function saveGallery() {
-    localStorage.setItem('viuna-gallery', JSON.stringify(galleryImages));
-}
-
-function deleteImage(index) {
-    if (confirm('Möchten Sie dieses Bild wirklich löschen?')) {
-        galleryImages.splice(index, 1);
-        saveGallery();
-        loadGallery();
-    }
-}
-
-// Image upload
-document.getElementById('imageUpload')?.addEventListener('click', () => {
-    document.getElementById('imageInput').click();
-});
-
-document.getElementById('imageInput')?.addEventListener('change', (e) => {
-    const file = e.target.files[0];
-    if (!file) return;
-
-    const reader = new FileReader();
-    reader.onload = (event) => {
-        galleryImages.push({
-            name: file.name,
-            data: event.target.result
-        });
-        saveGallery();
-        loadGallery();
-    };
-    reader.readAsDataURL(file);
-});
-
-// ===================================
 // CONTENT MANAGEMENT
 // ===================================
 document.getElementById('contentForm')?.addEventListener('submit', (e) => {
@@ -431,9 +305,7 @@ function showAlert(alertId, message) {
 
 function loadDashboardData() {
     loadMenuItems();
-    loadGallery();
     updateMenuCount();
-    updateGalleryCount();
 }
 
 // ===================================

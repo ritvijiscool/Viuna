@@ -422,9 +422,56 @@ function showAlert(alertId, message) {
     }
 }
 
-function loadDashboardData() {
-    loadMenuItems();
+async function loadDashboardData() {
+    await loadMenuItems();
     updateMenuCount();
+    await loadContentData();
+    await loadContactData();
+}
+
+// Load content data and populate form fields
+async function loadContentData() {
+    try {
+        const contentData = await loadContentFromDB('site-content');
+
+        if (contentData) {
+            // Populate hero title fields
+            if (contentData.heroTitleDE) document.getElementById('heroTitleDE').value = contentData.heroTitleDE;
+            if (contentData.heroTitleTR) document.getElementById('heroTitleTR').value = contentData.heroTitleTR;
+            if (contentData.heroTitleEN) document.getElementById('heroTitleEN').value = contentData.heroTitleEN;
+
+            // Populate hero subtitle fields
+            if (contentData.heroSubtitleDE) document.getElementById('heroSubtitleDE').value = contentData.heroSubtitleDE;
+            if (contentData.heroSubtitleTR) document.getElementById('heroSubtitleTR').value = contentData.heroSubtitleTR;
+            if (contentData.heroSubtitleEN) document.getElementById('heroSubtitleEN').value = contentData.heroSubtitleEN;
+
+            // Populate about text fields
+            if (contentData.aboutTextDE) document.getElementById('aboutTextDE').value = contentData.aboutTextDE;
+            if (contentData.aboutTextTR) document.getElementById('aboutTextTR').value = contentData.aboutTextTR;
+            if (contentData.aboutTextEN) document.getElementById('aboutTextEN').value = contentData.aboutTextEN;
+        }
+    } catch (error) {
+        console.log('No content data in database yet, using default values');
+    }
+}
+
+// Load contact data and populate form fields
+async function loadContactData() {
+    try {
+        const contactData = await loadContentFromDB('contact-info');
+
+        if (contactData) {
+            if (contactData.address) document.getElementById('address').value = contactData.address;
+            if (contactData.phone) document.getElementById('phone').value = contactData.phone;
+            if (contactData.email) document.getElementById('email').value = contactData.email;
+            if (contactData.instagram) document.getElementById('instagram').value = contactData.instagram;
+            if (contactData.facebook) document.getElementById('facebook').value = contactData.facebook;
+            if (contactData.hoursWeekday) document.getElementById('hoursWeekday').value = contactData.hoursWeekday;
+            if (contactData.hoursWeekend) document.getElementById('hoursWeekend').value = contactData.hoursWeekend;
+        }
+    } catch (error) {
+        console.log('No contact data in database yet, using default values');
+    }
 }
 
 // ===================================

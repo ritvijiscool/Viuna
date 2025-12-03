@@ -4,6 +4,16 @@
   # No build command needed for static site
   publish = "/"
 
+[functions]
+  directory = "netlify/functions"
+  node_bundler = "esbuild"
+
+[dev]
+  framework = "#static"
+  
+# Environment hints for Netlify DB
+# NETLIFY_DATABASE_URL is automatically provided by Netlify
+
 # Redirect rules
 [[redirects]]
   from = "/admin"

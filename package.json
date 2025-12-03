@@ -1,0 +1,19 @@
+{
+    "name": "viuna-website",
+    "version": "1.0.0",
+    "description": "Viuna - Come to Veggie Restaurant Website",
+    "type": "module",
+    "scripts": {
+        "dev": "netlify dev",
+        "build": "echo 'Static site - no build needed'"
+    },
+    "dependencies": {
+        "@netlify/neon": "^0.1.0"
+    },
+    "devDependencies": {
+        "netlify-cli": "^17.0.0"
+    },
+    "engines": {
+        "node": ">=20.12.2"
+    }
+}

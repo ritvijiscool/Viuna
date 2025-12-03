@@ -30,59 +30,78 @@ document.addEventListener('DOMContentLoaded', () => {
 // ===================================
 // LOAD ADMIN DATA
 // ===================================
-function loadAdminData() {
-    // Load contact information
-    const contactData = JSON.parse(localStorage.getItem('viuna-contact'));
-    if (contactData) {
-        // Update footer contact info
-        const addressEl = document.querySelector('[data-translate="footer_address"]');
-        const phoneEl = document.querySelector('[data-translate="footer_phone"]');
-        const emailEl = document.querySelector('[data-translate="footer_email"]');
-        const hoursWeekdayEl = document.querySelector('[data-translate="footer_hours_weekday"]');
-        const hoursWeekendEl = document.querySelector('[data-translate="footer_hours_weekend"]');
+async function loadAdminData() {
+    // Load contact information from database
+    try {
+        const contactData = await fetch('/api/get-content?slug=contact-info')
+            .then(res => res.ok ? res.json() : null)
+            .then(data => data?.content);
 
-        if (addressEl) addressEl.textContent = contactData.address;
-        if (phoneEl) phoneEl.textContent = 'Tel: ' + contactData.phone;
-        if (emailEl) emailEl.textContent = contactData.email;
-        if (hoursWeekdayEl) hoursWeekdayEl.textContent = 'Mo-Fr: ' + contactData.hoursWeekday;
-        if (hoursWeekendEl) hoursWeekendEl.textContent = 'Sa-So: ' + contactData.hoursWeekend;
+        if (contactData) {
+            // Update footer contact info
+            const addressEl = document.querySelector('[data-translate="footer_address"]');
+            const phoneEl = document.querySelector('[data-translate="footer_phone"]');
+            const emailEl = document.querySelector('[data-translate="footer_email"]');
+            const hoursWeekdayEl = document.querySelector('[data-translate="footer_hours_weekday"]');
+            const hoursWeekendEl = document.querySelector('[data-translate="footer_hours_weekend"]');
 
-        // Update social media links
-        const instagramLink = document.querySelector('.social-link[aria-label="Instagram"]');
-        const facebookLink = document.querySelector('.social-link[aria-label="Facebook"]');
+            if (addressEl) addressEl.textContent = contactData.address;
+            if (phoneEl) phoneEl.textContent = 'Tel: ' + contactData.phone;
+            if (emailEl) emailEl.textContent = contactData.email;
+            if (hoursWeekdayEl) hoursWeekdayEl.textContent = 'Mo-Fr: ' + contactData.hoursWeekday;
+            if (hoursWeekendEl) hoursWeekendEl.textContent = 'Sa-So: ' + contactData.hoursWeekend;
 
-        if (instagramLink && contactData.instagram) {
-            instagramLink.href = contactData.instagram;
+            // Update social media links
+            const instagramLink = document.querySelector('.social-link[aria-label="Instagram"]');
+            const facebookLink = document.querySelector('.social-link[aria-label="Facebook"]');
+
+            if (instagramLink && contactData.instagram) {
+                instagramLink.href = contactData.instagram;
+            }
+            if (facebookLink && contactData.facebook) {
+                facebookLink.href = contactData.facebook;
+            }
         }
-        if (facebookLink && contactData.facebook) {
-            facebookLink.href = contactData.facebook;
-        }
+    } catch (error) {
+        console.log('Contact data not available from database, using static content');
     }
 
-    // Load content data
-    const contentData = JSON.parse(localStorage.getItem('viuna-content'));
-    if (contentData) {
-        // Update translations with dynamic content
-        if (contentData.heroTitleDE) translations.de.hero_title = contentData.heroTitleDE;
-        if (contentData.heroTitleTR) translations.tr.hero_title = contentData.heroTitleTR;
-        if (contentData.heroTitleEN) translations.en.hero_title = contentData.heroTitleEN;
+    // Load content data from database
+    try {
+        const contentData = await fetch('/api/get-content?slug=site-content')
+            .then(res => res.ok ? res.json() : null)
+            .then(data => data?.content);
 
-        if (contentData.heroSubtitleDE) translations.de.hero_subtitle = contentData.heroSubtitleDE;
-        if (contentData.heroSubtitleTR) translations.tr.hero_subtitle = contentData.heroSubtitleTR;
-        if (contentData.heroSubtitleEN) translations.en.hero_subtitle = contentData.heroSubtitleEN;
+        if (contentData) {
+            // Update translations with dynamic content
+            if (contentData.heroTitleDE) translations.de.hero_title = contentData.heroTitleDE;
+            if (contentData.heroTitleTR) translations.tr.hero_title = contentData.heroTitleTR;
+            if (contentData.heroTitleEN) translations.en.hero_title = contentData.heroTitleEN;
 
-        if (contentData.aboutTextDE) translations.de.footer_about_text = contentData.aboutTextDE; // Using footer about text key for simplicity or create new key
-        // Note: The main about section text is hardcoded in HTML currently. 
-        // To make it fully dynamic, we should add data-translate attributes to the about section paragraphs.
+            if (contentData.heroSubtitleDE) translations.de.hero_subtitle = contentData.heroSubtitleDE;
+            if (contentData.heroSubtitleTR) translations.tr.hero_subtitle = contentData.heroSubtitleTR;
+            if (contentData.heroSubtitleEN) translations.en.hero_subtitle = contentData.heroSubtitleEN;
 
-        // Update current view
-        updateLanguage(currentLanguage);
+            if (contentData.aboutTextDE) translations.de.footer_about_text = contentData.aboutTextDE;
+
+            // Update current view
+            updateLanguage(currentLanguage);
+        }
+    } catch (error) {
+        console.log('Content data not available from database, using static content');
     }
 
-    // Load menu items
-    const menuItems = JSON.parse(localStorage.getItem('viuna-menu-items'));
-    if (menuItems && menuItems.length > 0) {
-        updateMenuDisplay(menuItems);
+    // Load menu items from database
+    try {
+        const menuItems = await fetch('/api/get-content?slug=menu-items')
+            .then(res => res.ok ? res.json() : null)
+            .then(data => data?.content);
+
+        if (menuItems && Array.isArray(menuItems) && menuItems.length > 0) {
+            updateMenuDisplay(menuItems);
+        }
+    } catch (error) {
+        console.log('Menu items not available from database, using static content');
     }
 }
 
